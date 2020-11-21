@@ -1,0 +1,89 @@
+﻿@model DoAn2.Models.DatHang
+
+@{
+    ViewBag.Title = "Xem chi tiết";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Chi tiết</h2>
+
+<div>
+    <h4>Đơn hàng</h4>
+    <hr />
+    <dl class="dl-horizontal">
+       
+
+      
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayDatHang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayDatHang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TriGia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TriGia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DaGiao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DaGiao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayGiao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayGiao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HoTen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoTen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiaChi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaChi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DienThoai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DienThoai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.DatHangID }) |
+    @Html.ActionLink("Quay về", "Index") |
+    @Html.ActionLink("Xuất Hóa Đơn", "XuatExcel", "AdminDatHang")
+    
+</p>

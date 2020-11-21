@@ -1,0 +1,70 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@using DoAn2.Models;
+@model IPagedList<Sach>
+
+@{
+    ViewBag.Title = "Đọc nhiều nhất";
+}
+
+<!-- Page Title
+        ============================================= -->
+<section id="page-title">
+
+    <div class="container clearfix">
+        <h1>@ViewBag.TieuDeXN</h1>
+    </div>
+</section><!-- #page-title end -->
+<!-- Content
+        ============================================= -->
+<section id="content">
+
+    <div class="content-wrap">
+
+        <div class="container clearfix">
+            <form id="frmChonMua" method="post">
+                @Html.AntiForgeryToken()
+            </form>
+            <!-- Shop
+            ============================================= -->
+            <div id="shop" class="shop grid-container clearfix" data-layout="fitRows">
+                @foreach (var item in Model)
+                {
+                    <div class="product clearfix">
+                        <div class="product-image">
+                            <a href="#"><img src="~/Images/@item.HinhBia" alt="@item.TenSach"></a>
+                            <div class="sale-flash">@item.SoLanXem lượt xem</div>
+                            <div class="product-overlay">
+                                <button class="button button-3d button-small nomargin fright"
+                                        form="frmChonMua"
+                                        formaction="@Url.Action("Them", "GioHang", new { sanPhamID = item.SachID })">
+                                    Thêm vào giỏ hàng
+                                </button>
+                            </div>
+                        </div>
+                        <div class="product-desc">
+                            <div class="product-title">
+                                <h3>
+                                    @Html.ActionLink(item.TenSach, "ChiTiet", "SanPham", new { id = item.SachID }, htmlAttributes: new { @target = "_blank" })
+                                </h3>
+                            </div>
+                            <div class="product-price">@item.GiaBan.ToString("0,00##VNĐ")</div>
+                        </div>
+                    </div>
+                }
+            </div><!-- #shop end -->
+            <div class="text-center">
+                @if (ViewBag.NhaXuatBanID != null)
+                {
+                    @Html.PagedListPager(Model, p => Url.Action("DanhMucTheoNXB",new { page = p, id = ViewBag.NhaXuatBanID }))
+                }
+                else
+                {
+                    @Html.PagedListPager(Model, p => Url.Action("XemNhieu", new { page = p }))
+                }
+            </div>
+        </div>
+
+    </div>
+
+</section><!-- #content end -->

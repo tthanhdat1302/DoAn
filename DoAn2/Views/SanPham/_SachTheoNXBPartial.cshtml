@@ -1,0 +1,9 @@
+﻿@model List<DoAn2.Models.NhaXuatBan>
+
+<a href="#"><div>Sách theo NXB</div></a>
+<ul>
+    @foreach (var item in Model)
+    {
+        <li><a href="@Url.Action("DanhMucTheoNXB", "SanPham", new { id = item.NhaXuatBanID })"><div>@item.TenNhaXuatBan</div></a></li>
+    }
+</ul>

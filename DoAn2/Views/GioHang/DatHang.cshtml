@@ -1,0 +1,161 @@
+﻿@model DoAn2.Models.DatHang
+
+@{
+    ViewBag.Title = "Đặt mua hàng";
+    var dsSanPham = ViewBag.GioHang as DoAn2.ViewModels.GioHangModel;
+}
+
+
+<!-- Page Title
+    ============================================= -->
+<section id="page-title">
+
+    <div class="container clearfix">
+        <h1>Đặt hàng</h1>
+    </div>
+
+</section><!-- #page-title end -->
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <!-- Content
+        ============================================= -->
+    <section id="content">
+
+        <div class="content-wrap">
+
+            <div class="container clearfix">
+
+
+
+                <div class="row clearfix">
+                    <div class="col-md-12">
+                        <h3>Thông tin đơn hàng</h3>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="col_full">
+                            @Html.LabelFor(model => model.HoTen, htmlAttributes: new { @for = "billing-form-name" })
+                            @Html.EditorFor(model => model.HoTen, new { htmlAttributes = new { @id = "billing-form-name", @class = "sm-form-control" } })
+                            @Html.ValidationMessageFor(model => model.HoTen, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="clear"></div>
+
+                        <div class="col_full">
+                            @Html.LabelFor(model => model.DiaChi, htmlAttributes: new { @for = "billing-form-address" })
+                            @Html.TextAreaFor(model => model.DiaChi, htmlAttributes: new { @rows = "5", @cols = "60", @class = "sm-form-control", @id = "shipping-form-address" })
+                            @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col_full">
+                            @Html.LabelFor(model => model.DienThoai, htmlAttributes: new { @for = "billing-form-number" })
+                            @Html.EditorFor(model => model.DienThoai, new { htmlAttributes = new { @class = "sm-form-control", @id = "billing-form-number" } })
+                            @Html.ValidationMessageFor(model => model.DienThoai, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col_full">
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @for = "billing-form-email" })
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "sm-form-control", @id = "billing-form-email" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+
+                    <div class="clear bottommargin"></div>
+                    <div class="col-md-6">
+                        <div class="table-responsive clearfix">
+                            <h4>Bạn đặt mua</h4>
+
+                            <table class="table cart">
+                                <thead>
+                                    <tr>
+                                        <th class="cart-product-thumbnail">&nbsp;</th>
+                                        <th class="cart-product-name">Sản phẩm</th>
+                                        <th class="cart-product-quantity">Số lượng</th>
+                                        <th class="cart-product-subtotal">Thành tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var item in dsSanPham.Items)
+                                    {
+                                        <tr class="cart_item">
+                                            <td class="cart-product-thumbnail">
+                                                <a href="#"><img width="64" height="64" src="~/Images/@item.SanPham.HinhBia" alt="@item.SanPham.TenSach"></a>
+                                            </td>
+
+                                            <td class="cart-product-name">
+                                                <a href="#">@item.SanPham.TenSach</a>
+                                            </td>
+
+                                            <td class="cart-product-quantity">
+                                                <div class="quantity clearfix">
+                                                    @item.SoLuong
+                                                </div>
+                                            </td>
+
+                                            <td class="cart-product-subtotal">
+                                                <span class="amount">@((item.SanPham.GiaBan * item.SoLuong).ToString("#,##0VNĐ"))</span>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="table-responsive">
+                            <h4>Đơn hàng</h4>
+
+                            <table class="table cart">
+                                <tbody>
+                                    <tr class="cart_item">
+                                        <td class="notopborder cart-product-name">
+                                            <strong>Tổng trị giá</strong>
+                                        </td>
+
+                                        <td class="notopborder cart-product-name">
+                                            <span class="amount">@dsSanPham.TongTriGia.ToString("0,00##VNĐ")</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="cart_item">
+                                        <td class="cart-product-name">
+                                            <strong>Phí ship</strong>
+                                        </td>
+
+                                        <td class="cart-product-name">
+                                            <span class="amount">Miễn phí</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="cart_item">
+                                        <td class="cart-product-name">
+                                            <strong>Thành tiền</strong>
+                                        </td>
+
+                                        <td class="cart-product-name">
+                                            <span class="amount color lead"><strong>@dsSanPham.TongTriGia.ToString("0,00##VNĐ")</strong></span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+
+
+                        <button type="submit" class="button button-3d fright">Đặt mua</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </section><!-- #content end -->
+
+
+}
+<!-- /SECTION -->
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

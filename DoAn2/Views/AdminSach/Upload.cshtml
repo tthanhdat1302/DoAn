@@ -1,0 +1,15 @@
+﻿@model DoAn2.Models.Sach 
+@{
+    ViewBag.Title = "Upload";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<h2>Upload hình cho sản phẩm </h2>
+<div class="text-danger"> @ViewBag.ThongBao</div>
+
+@using (Html.BeginForm("Upload", "AdminSach", FormMethod.Post,htmlAttributes: new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <input type="file" name="taptin" id="HinhBia" />
+    <input type="submit" value="Upload hình" />
+}
+

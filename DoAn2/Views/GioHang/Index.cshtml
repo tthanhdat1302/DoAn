@@ -1,0 +1,162 @@
+﻿@model DoAn2.ViewModels.GioHangModel
+
+@{
+    ViewBag.Title = "Giỏ hàng";
+}
+
+<!-- Page Title
+        ============================================= -->
+<section id="page-title">
+
+    <div class="container clearfix">
+        <h1>Giỏ hàng</h1>
+
+    </div>
+
+</section><!-- #page-title end -->
+<!-- Content
+        ============================================= -->
+<section id="content">
+
+    <div class="content-wrap">
+        @if (Model != null)
+        {
+            int stt = 0;
+            <div class="container clearfix">
+
+                <div class="table-responsive bottommargin">
+
+                    <form id="frmXoa" method="post"></form>
+
+                    <table class="table cart">
+                        <thead>
+                            <tr>
+                                <th class="cart-product-thumbnail">&nbsp;</th>
+                                <th class="cart-product-name">Sản phẩm</th>
+                                <th class="cart-product-price">Đơn giá</th>
+                                <th class="cart-product-quantity">Số lượng</th>
+                                <th class="cart-product-subtotal">Thành tiền</th>
+                                <th class="cart-product-remove1">&nbsp;</th>
+                                <th class="cart-product-remove2">&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model.Items)
+                            {
+                                stt++;
+                                var frmHCSL = "frmHCSL" + stt;
+                                <tr class="cart_item">
+                                    <td class="cart-product-thumbnail">
+                                        <a href="#"><img width="64" height="64" src="~/Images/@item.SanPham.HinhBia" alt="@item.SanPham.TenSach"></a>
+                                    </td>
+                                    <td class="cart-product-name">
+                                        <a href="#">@item.SanPham.TenSach</a>
+                                    </td>
+
+                                    <td class="cart-product-price">
+                                        <span class="amount">@item.SanPham.GiaBan.ToString("0,00##VNĐ")</span>
+                                    </td>
+
+                                    <td class="cart-product-quantity">
+                                        <div class="quantity clearfix">
+                                            @using (Html.BeginForm("HieuChinh", "GioHang", new { sanPhamID = item.SanPham.SachID }, FormMethod.Post, htmlAttributes: new { @id = frmHCSL, @style = "display:inline" }))
+                                            {
+                                                var SLID = "SL" + stt;
+                                                @Html.TextBox("soLuong", item.SoLuong, htmlAttributes: new { @style = "width:100px", @min = "1", @max = int.MaxValue, @type = "number", @id = SLID })
+                                            }
+                                        </div>
+                                    </td>
+
+                                    <td class="cart-product-subtotal">
+                                        <span class="amount">@((item.SanPham.GiaBan * item.SoLuong).ToString("#,##0VNĐ"))</span>
+                                    </td>
+                                    <td class="cart-product-remove1">
+                                        <button type="submit" class="btn btn-default btn-sm"
+                                                form="frmXoa"
+                                                formaction="@Url.Action("Xoa", "GioHang", new { sanPhamID = item.SanPham.SachID })">
+                                            <i class="icon-trash2"></i>
+                                        </button>
+                                    </td>
+                                    <td class="cart-product-remove2">
+                                        <button type="submit" class="btn btn-default btn-sm"
+                                                form="@frmHCSL">
+                                            <i class="icon-save"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+
+                            <tr class="cart_item">
+                                <td colspan="6">
+                                    <div class="row clearfix">
+                                        <div class="col-md-4 col-xs-4 nopadding">
+
+                                        </div>
+                                        @{ 
+                                            double total = @Model.TongTriGia / 23.177;
+                                            string url = "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_xclick&amount="+(@total)+ "&business=JanjuaTailors@Shop.com&item_name=item&return=http://localhost:60410/GioHang/DatHangThanhCong";
+                                        }
+                                    <div class="col-md-8 col-xs-8 nopadding">
+                                        <a href="@Url.Action("DatHang", "GioHang")" class="button button-3d nomargin fright">Đặt mua</a>
+                                        <a href="@url" class="button button-3d nomargin fright">Thanh toán bằng thẻ tín dụng</a>
+                                        <a href="@Url.Action("Index", "Home")" class="button button-3d notopmargin fright">Tiếp tục mua</a>
+                                    </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <div class="row clearfix">
+
+                    <div class="col-md-6 clearfix"></div>
+                    <div class="col-md-6 clearfix">
+                        <div class="table-responsive">
+                            <h4>Tổng giỏ hàng</h4>
+
+                            <table class="table cart">
+                                <tbody>
+                                    <tr class="cart_item">
+                                        <td class="cart-product-name">
+                                            <strong>Tổng số mặt hàng</strong>
+                                        </td>
+
+                                        <td class="cart-product-name">
+                                            <span class="amount">@Model.TongSanPham</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="cart_item">
+                                        <td class="cart-product-name">
+                                            <strong>Tổng số lượng</strong>
+                                        </td>
+
+                                        <td class="cart-product-name">
+                                            <span class="amount">@Model.TongSoLuong</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="cart_item">
+                                        <td class="cart-product-name">
+                                            <strong>Tổng giá trị</strong>
+                                        </td>
+
+                                        <td class="cart-product-name">
+                                            <span class="amount color lead"><strong>@Model.TongTriGia.ToString("0,00##VNĐ")</strong></span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        }
+    </div>
+
+</section><!-- #content end -->

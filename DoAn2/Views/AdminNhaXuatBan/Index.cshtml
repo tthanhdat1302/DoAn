@@ -1,0 +1,82 @@
+﻿@model IEnumerable<DoAn2.Models.NhaXuatBan>
+
+@{
+    ViewBag.Title = "Danh sách NXB";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Danh mục sách</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="dataTable" class="display" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TenNhaXuatBan)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DiaChi)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DienThoai)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TenNhaXuatBan)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DiaChi)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DienThoai)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TenNhaXuatBan)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DiaChi)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DienThoai)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Sửa", "Edit", new { id = item.NhaXuatBanID }) |
+                                    @Html.ActionLink("Xem", "Details", new { id = item.NhaXuatBanID }) |
+                                    @Html.ActionLink("Xóa", "Delete", new { id = item.NhaXuatBanID })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+    </script>
+}
+

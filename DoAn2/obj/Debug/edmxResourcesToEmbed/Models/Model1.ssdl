@@ -1,0 +1,357 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BOOKSTOREQBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ChuDe">
+    <Key>
+      <PropertyRef Name="MaChuDe" />
+    </Key>
+    <Property Name="MaChuDe" Type="char" MaxLength="5" Nullable="false" />
+    <Property Name="TenChuDe" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="SachID" />
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="SachID" Type="int" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="NoiDung" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NgayDang" Type="date" />
+    <Property Name="Rating" Type="int" />
+  </EntityType>
+  <EntityType Name="DatHang">
+    <Key>
+      <PropertyRef Name="DatHangID" />
+    </Key>
+    <Property Name="DatHangID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NgayDatHang" Type="datetime" Nullable="false" />
+    <Property Name="TriGia" Type="float" Nullable="false" />
+    <Property Name="DaGiao" Type="bit" Nullable="false" />
+    <Property Name="NgayGiao" Type="datetime" />
+    <Property Name="HoTen" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DiaChi" Type="nvarchar" MaxLength="100" />
+    <Property Name="DienThoai" Type="varchar" MaxLength="15" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="DatHangCT">
+    <Key>
+      <PropertyRef Name="DatHangID" />
+      <PropertyRef Name="SachID" />
+    </Key>
+    <Property Name="DatHangID" Type="int" Nullable="false" />
+    <Property Name="SachID" Type="int" Nullable="false" />
+    <Property Name="SoLuong" Type="int" Nullable="false" />
+    <Property Name="DonGia" Type="float" Nullable="false" />
+    <Property Name="ThanhTien" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Text" Type="nvarchar" MaxLength="50" />
+    <Property Name="Link" Type="nvarchar" MaxLength="250" />
+    <Property Name="DisplayOrder" Type="int" />
+    <Property Name="Target" Type="nvarchar" MaxLength="50" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="TypeID" Type="int" />
+  </EntityType>
+  <EntityType Name="MenuType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="NhaXuatBan">
+    <Key>
+      <PropertyRef Name="NhaXuatBanID" />
+    </Key>
+    <Property Name="NhaXuatBanID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenNhaXuatBan" Type="nvarchar" MaxLength="100" />
+    <Property Name="DiaChi" Type="nvarchar" MaxLength="150" />
+    <Property Name="DienThoai" Type="varchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="Sach">
+    <Key>
+      <PropertyRef Name="SachID" />
+    </Key>
+    <Property Name="SachID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenSach" Type="nvarchar" MaxLength="150" />
+    <Property Name="GiaBan" Type="float" Nullable="false" />
+    <Property Name="MaChuDe" Type="char" MaxLength="5" />
+    <Property Name="NhaXuatBanID" Type="int" Nullable="false" />
+    <Property Name="MoTa" Type="nvarchar(max)" />
+    <Property Name="HinhBia" Type="nvarchar" MaxLength="50" />
+    <Property Name="SoTrang" Type="int" Nullable="false" />
+    <Property Name="TrongLuong" Type="int" Nullable="false" />
+    <Property Name="NgayCapNhat" Type="datetime" Nullable="false" />
+    <Property Name="SoLanXem" Type="int" Nullable="false" />
+    <Property Name="SoLuongBan" Type="int" Nullable="false" />
+    <Property Name="HetHang" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SlideBar">
+    <Key>
+      <PropertyRef Name="SlideID" />
+    </Key>
+    <Property Name="SlideID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Hinh" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="TacGia">
+    <Key>
+      <PropertyRef Name="TacGiaID" />
+    </Key>
+    <Property Name="TacGiaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenTacGia" Type="nvarchar" MaxLength="100" />
+    <Property Name="DiaChi" Type="nvarchar" MaxLength="150" />
+    <Property Name="DienThoai" Type="varchar" MaxLength="15" />
+    <Property Name="TieuSu" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="ThamGia">
+    <Key>
+      <PropertyRef Name="SachID" />
+      <PropertyRef Name="TacGiaID" />
+    </Key>
+    <Property Name="SachID" Type="int" Nullable="false" />
+    <Property Name="TacGiaID" Type="int" Nullable="false" />
+    <Property Name="VaiTro" Type="nvarchar" MaxLength="100" />
+    <Property Name="ViTri" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ThongTinCongTi">
+    <Key>
+      <PropertyRef Name="TenCongTi" />
+    </Key>
+    <Property Name="TenCongTi" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TruSo" Type="nvarchar(max)" />
+    <Property Name="SDT" Type="varchar" MaxLength="50" />
+    <Property Name="Fax" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Logo" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TaiKhoan" Type="nvarchar(max)" />
+    <Property Name="MatKhau" Type="nvarchar(max)" />
+    <Property Name="TrangThai" Type="bit" Nullable="false" />
+    <Property Name="RoleID" Type="int" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserKH">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TaiKhoan" Type="nvarchar(max)" />
+    <Property Name="PassWord" Type="nvarchar(max)" />
+    <Property Name="ConfirmPassword" Type="nvarchar(max)" />
+    <Property Name="Ten" Type="nvarchar(max)" />
+    <Property Name="DiaChi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DienThoai" Type="nvarchar(max)" />
+    <Property Name="TinhThanh" Type="nvarchar" MaxLength="50" />
+    <Property Name="QuanHuyen" Type="nvarchar" MaxLength="50" />
+    <Property Name="NgayTao" Type="datetime" />
+    <Property Name="NgayCapNhat" Type="datetime" />
+    <Property Name="TrangThai" Type="bit" />
+    <Property Name="Hinh" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenRole" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="YKienKH">
+    <Key>
+      <PropertyRef Name="Email" />
+    </Key>
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="HoTen" Type="nvarchar" MaxLength="50" />
+    <Property Name="SDT" Type="varbinary" MaxLength="50" />
+    <Property Name="DiaChi" Type="nvarchar(max)" />
+    <Property Name="NoiDung" Type="nvarchar(max)" />
+    <Property Name="NgayGui" Type="date" />
+    <Property Name="KHID" Type="bigint" />
+  </EntityType>
+  <Association Name="FK_Comment_Sach">
+    <End Role="Sach" Type="Self.Sach" Multiplicity="1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sach">
+        <PropertyRef Name="SachID" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="SachID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comment_UserKH">
+    <End Role="UserKH" Type="Self.UserKH" Multiplicity="1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserKH">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DatHangCT_DatHang">
+    <End Role="DatHang" Type="Self.DatHang" Multiplicity="1" />
+    <End Role="DatHangCT" Type="Self.DatHangCT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DatHang">
+        <PropertyRef Name="DatHangID" />
+      </Principal>
+      <Dependent Role="DatHangCT">
+        <PropertyRef Name="DatHangID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DatHangCT_Sach">
+    <End Role="Sach" Type="Self.Sach" Multiplicity="1" />
+    <End Role="DatHangCT" Type="Self.DatHangCT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sach">
+        <PropertyRef Name="SachID" />
+      </Principal>
+      <Dependent Role="DatHangCT">
+        <PropertyRef Name="SachID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Menu_MenuType">
+    <End Role="MenuType" Type="Self.MenuType" Multiplicity="0..1" />
+    <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MenuType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Menu">
+        <PropertyRef Name="TypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sach_ChuDe">
+    <End Role="ChuDe" Type="Self.ChuDe" Multiplicity="0..1" />
+    <End Role="Sach" Type="Self.Sach" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChuDe">
+        <PropertyRef Name="MaChuDe" />
+      </Principal>
+      <Dependent Role="Sach">
+        <PropertyRef Name="MaChuDe" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sach_NhaXuatBan">
+    <End Role="NhaXuatBan" Type="Self.NhaXuatBan" Multiplicity="1" />
+    <End Role="Sach" Type="Self.Sach" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NhaXuatBan">
+        <PropertyRef Name="NhaXuatBanID" />
+      </Principal>
+      <Dependent Role="Sach">
+        <PropertyRef Name="NhaXuatBanID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ThamGia_Sach">
+    <End Role="Sach" Type="Self.Sach" Multiplicity="1" />
+    <End Role="ThamGia" Type="Self.ThamGia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sach">
+        <PropertyRef Name="SachID" />
+      </Principal>
+      <Dependent Role="ThamGia">
+        <PropertyRef Name="SachID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ThamGia_TacGia">
+    <End Role="TacGia" Type="Self.TacGia" Multiplicity="1" />
+    <End Role="ThamGia" Type="Self.ThamGia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TacGia">
+        <PropertyRef Name="TacGiaID" />
+      </Principal>
+      <Dependent Role="ThamGia">
+        <PropertyRef Name="TacGiaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_UserRole">
+    <End Role="UserRole" Type="Self.UserRole" Multiplicity="0..1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserRole">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BOOKSTOREQBModelStoreContainer">
+    <EntitySet Name="ChuDe" EntityType="Self.ChuDe" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DatHang" EntityType="Self.DatHang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DatHangCT" EntityType="Self.DatHangCT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MenuType" EntityType="Self.MenuType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NhaXuatBan" EntityType="Self.NhaXuatBan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sach" EntityType="Self.Sach" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SlideBar" EntityType="Self.SlideBar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TacGia" EntityType="Self.TacGia" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ThamGia" EntityType="Self.ThamGia" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ThongTinCongTi" EntityType="Self.ThongTinCongTi" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserKH" EntityType="Self.UserKH" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="YKienKH" EntityType="Self.YKienKH" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Comment_Sach" Association="Self.FK_Comment_Sach">
+      <End Role="Sach" EntitySet="Sach" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comment_UserKH" Association="Self.FK_Comment_UserKH">
+      <End Role="UserKH" EntitySet="UserKH" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DatHangCT_DatHang" Association="Self.FK_DatHangCT_DatHang">
+      <End Role="DatHang" EntitySet="DatHang" />
+      <End Role="DatHangCT" EntitySet="DatHangCT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DatHangCT_Sach" Association="Self.FK_DatHangCT_Sach">
+      <End Role="Sach" EntitySet="Sach" />
+      <End Role="DatHangCT" EntitySet="DatHangCT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Menu_MenuType" Association="Self.FK_Menu_MenuType">
+      <End Role="MenuType" EntitySet="MenuType" />
+      <End Role="Menu" EntitySet="Menu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sach_ChuDe" Association="Self.FK_Sach_ChuDe">
+      <End Role="ChuDe" EntitySet="ChuDe" />
+      <End Role="Sach" EntitySet="Sach" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sach_NhaXuatBan" Association="Self.FK_Sach_NhaXuatBan">
+      <End Role="NhaXuatBan" EntitySet="NhaXuatBan" />
+      <End Role="Sach" EntitySet="Sach" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ThamGia_Sach" Association="Self.FK_ThamGia_Sach">
+      <End Role="Sach" EntitySet="Sach" />
+      <End Role="ThamGia" EntitySet="ThamGia" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ThamGia_TacGia" Association="Self.FK_ThamGia_TacGia">
+      <End Role="TacGia" EntitySet="TacGia" />
+      <End Role="ThamGia" EntitySet="ThamGia" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_UserRole" Association="Self.FK_User_UserRole">
+      <End Role="UserRole" EntitySet="UserRole" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,67 @@
+﻿@model System.String
+
+@{
+    ViewBag.Title = "Không tìm thấy!!!!!";
+}
+
+<!-- Page Title
+        ============================================= -->
+<section id="page-title">
+
+    <div class="container clearfix">
+        <h1>Page Not Found</h1>
+    </div>
+
+</section><!-- #page-title end -->
+<!-- Content
+        ============================================= -->
+<section id="content">
+
+    <div class="content-wrap">
+
+        <div class="container clearfix">
+
+            <div class="col_half nobottommargin">
+                <div class="error404 center">404</div>
+            </div>
+
+            <div class="col_half nobottommargin col_last">
+
+                <div class="heading-block nobottomborder">
+                    <h4>Ooopps.! @Html.Raw(Model)</h4>
+
+                </div>
+
+
+
+                <div class="col_one_third widget_links topmargin nobottommargin">
+                    <ul>
+                        <li><a href="@Url.Action("Index","Home")">Trang chủ</a></li>
+                        <li><a href="#">Về chúng tôi</a></li>
+                        <li><a href="#">FAQs</a></li>
+                    </ul>
+                </div>
+
+                <div class="col_one_third widget_links topmargin nobottommargin">
+                    <ul>
+                        <li><a href="#">Cửa hàng</a></li>
+                        <li><a href="#">Portfolio</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="col_one_third widget_links topmargin nobottommargin col_last">
+                    <ul>
+                        <li><a href="#">Hổ trợ</a></li>
+                        <li><a href="#">Forums</a></li>
+                        <li><a href="#">Liên hệ</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section><!-- #content end -->

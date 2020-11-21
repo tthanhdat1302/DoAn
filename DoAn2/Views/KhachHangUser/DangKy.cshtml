@@ -1,0 +1,123 @@
+﻿@model DoAn2.Models.UserKH
+@*@using BotDetect.Web.UI.Mvc;
+    <link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl"
+          rel="stylesheet" type="text/css" />
+    @{ MvcCaptcha registerCapcha = new MvcCaptcha("registerCapcha"); }*@
+
+@{
+    ViewBag.Title = "Đăng ký";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Data/userKhController.js"></script>
+@*@section jsFooter{
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Data/userKhController.js"></script>
+
+}*@
+<div class="content">
+    @using (Html.BeginForm("DangKy", "KhachHangUser", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Đăng ký thành viên</h4>
+            <hr />
+            <div class="form-group">
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                @if (ViewBag.Success != null)
+                {
+                    <div class="alert alert-success">@ViewBag.Success</div>
+                }
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.TaiKhoan, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.TaiKhoan, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.TaiKhoan, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PassWord, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(model => model.PassWord, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PassWord, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ConfirmPassword, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Ten, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.Ten, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Ten, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DiaChi, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.DiaChi, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DienThoai, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.DienThoai, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DienThoai, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.TinhThanh, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("TinhThanh", new SelectList(new string[] { }), new { @class = "form-control", @id = "ddlProvince", @onClick = "loadDistrict(value)" })
+                    @Html.ValidationMessageFor(model => model.TinhThanh, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.QuanHuyen, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("QuanHuyen", new SelectList(new string[] { }), new { @class = "form-control", @id = "ddlDistrict" })
+                    @Html.ValidationMessageFor(model => model.QuanHuyen, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            @*<div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        @Html.Captcha(registerCapcha)
+                        @Html.TextBox("CaptchaCode")
+                    </div>
+                </div>*@
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Đăng ký" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    $(document).ready(function () {
+        loadProvince()
+    });
+</script>

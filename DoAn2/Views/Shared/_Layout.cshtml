@@ -1,0 +1,360 @@
+﻿<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="author" content="SemiColonWeb" />
+
+    <!-- Stylesheets
+    ============================================= -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="~/Template/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="~/Template/style.css" type="text/css" />
+    <link rel="stylesheet" href="~/Template/css/dark.css" type="text/css" />
+    <link rel="stylesheet" href="~/Template/css/font-icons.css" type="text/css" />
+    <link rel="stylesheet" href="~/Template/css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="~/Template/css/magnific-popup.css" type="text/css" />
+
+    <link rel="stylesheet" href="~/Template/css/responsive.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- SLIDER REVOLUTION 5.x CSS SETTINGS -->
+    <link rel="stylesheet" type="text/css" href="~/Template/include/rs-plugin/css/settings.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="~/Template/include/rs-plugin/css/layers.css">
+    <link rel="stylesheet" type="text/css" href="~/Template/include/rs-plugin/css/navigation.css">
+
+    <!-- Document Title
+    ============================================= -->
+    <title>@ViewBag.Title | Nhà sách</title>
+
+    <style>
+
+        .revo-slider-emphasis-text {
+            font-size: 58px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            font-family: 'Raleway', sans-serif;
+            padding: 15px 20px;
+            border-top: 2px solid #FFF;
+            border-bottom: 2px solid #FFF;
+        }
+
+        .revo-slider-desc-text {
+            font-size: 20px;
+            font-family: 'Lato', sans-serif;
+            width: 650px;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .revo-slider-caps-text {
+            font-size: 16px;
+            font-weight: 400;
+            letter-spacing: 3px;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        .tp-video-play-button {
+            display: none !important;
+        }
+
+        .tp-caption {
+            white-space: nowrap;
+        }
+    </style>
+
+    @RenderSection("Styles", false)
+
+</head>
+
+<body class="stretched">
+
+    <!-- Document Wrapper
+    ============================================= -->
+    <div id="wrapper" class="clearfix">
+
+        <!-- Top Bar
+        ============================================= -->
+        <div id="top-bar" class="hidden-xs">
+            
+                <div class="container clearfix">
+                    @*@ViewBag.Title1*@
+                    @Html.Action("TopMenuTrangChu","Home")
+                </div>
+           
+        </div>
+
+
+        <!-- #top-bar end -->
+        <!-- Header
+        ============================================= -->
+        <header id="header">
+
+
+            <div id="header-wrap">
+
+                <div class="container clearfix">
+
+                    <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+
+                    <!-- Logo
+                    ============================================= -->
+                    <div id="logo">
+                        <a href="@Url.Action("Index","Home")" class="standard-logo" data-dark-logo="images/logo-dark.png"><img src="~/Template/images/logo.png" alt="Canvas Logo"></a>
+                        <a href="@Url.Action("Index","Home")" class="retina-logo" data-dark-logo="images/logo-dark@2x.png"><img src="~/Template/images/logo@2x.png" alt="Canvas Logo"></a>
+                    </div><!-- #logo end -->
+                    <!-- Primary Navigation
+                    ============================================= -->
+                    <nav id="primary-menu">
+
+                        <ul>
+                            <li class="@ViewBag.TcAct"><a href="@Url.Action("Index","Home")"><div>Trang chủ</div></a></li>
+                            <li class="@ViewBag.DmAct"><a href="@Url.Action("DanhMuc","SanPham")"><div>Danh mục</div></a></li>
+                            <li class="@ViewBag.NccAct">
+                                @Html.Action("_SachTheoNXBPartial", "SanPham")
+                            </li>
+                            <li class="@ViewBag.NnAct"><a href="@Url.Action("XemNhieu","SanPham")"><div>Đọc nhiều</div></a></li>
+                            <li class="@ViewBag.ContactAct"><a href="@Url.Action("Contact","Home")"><div>Liên hệ</div></a></li>
+                        </ul>
+
+                        @Html.Action("_DropDownCart", "GioHang")
+
+                        <!-- Top Search
+                        ============================================= -->
+                        <div id="top-search">
+                            <a href="#" id="top-search-trigger"><i class="icon-search3"></i><i class="icon-line-cross"></i></a>
+                            @using (Html.BeginForm("TimKiem", "SanPham", FormMethod.Get, htmlAttributes: new { @method = "get", @role = "search" }))
+                            {
+                                @Html.TextBox("tuKhoa", null, htmlAttributes: new { @class = "input", @placeholder = "Bạn tìm gì ..." })
+                            }
+                        </div><!-- #top-search end -->
+
+                    </nav><!-- #primary-menu end -->
+
+                </div>
+
+            </div>
+
+        </header><!-- #header end -->
+
+        @RenderBody()
+
+        <!-- Footer
+           ============================================= -->
+        <footer id="footer" class="dark">
+
+            <div class="container">
+
+                <!-- Footer Widgets
+                ============================================= -->
+                <div class="footer-widgets-wrap clearfix">
+
+                    <div class="col_two_third">
+
+                        <div class="col_one_third">
+
+                            <div class="widget clearfix">
+
+                                <img src="~/Template/images/footer-widget-logo.png" alt="" class="footer-logo">
+
+
+
+                                <div style="background: url('images/world-map.png') no-repeat center center; background-size: 100%;">
+                                    <address>
+                                        <strong>Trụ sở:</strong><br>
+                                        .......................<br>
+                                        .......................<br>
+                                    </address>
+                                    <abbr title="Phone Number"><strong>SĐT:</strong></abbr> .......................<br>
+                                    <abbr title="Fax"><strong>Fax:</strong></abbr> .......................<br>
+                                    <abbr title="Email Address"><strong>Email:</strong></abbr> .......................
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col_one_third">
+
+                            <div class="widget widget_links clearfix">
+
+                                <h4>Hỗ trợ</h4>
+
+                                <ul>
+                                    <li><a href="http://codex.wordpress.org/">Chính sách đổi - trả - hoàn tiền</a></li>
+                                    <li><a href="http://wordpress.org/support/forum/requests-and-feedback">Chính sách khách sỉ</a></li>
+                                    <li><a href="http://wordpress.org/extend/plugins/">Phương thức vận chuyển</a></li>
+                                    <li><a href="http://wordpress.org/support/">Phương thức thanh toán</a></li>
+
+                                </ul>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col_one_third col_last">
+
+                            <div class="widget widget_links clearfix">
+
+                                <h4>Dịch vụ</h4>
+
+                                <ul>
+                                    <li><a href="http://codex.wordpress.org/">Điều khoản sử dụng</a></li>
+                                    <li><a href="http://wordpress.org/support/forum/requests-and-feedback">Chính sách bảo mật</a></li>
+                                    <li><a href="http://wordpress.org/extend/plugins/">Giới thiệu</a></li>
+                                    <li><a href="http://wordpress.org/support/">Hệ thống trung tâm - nhà sách</a></li>
+                                </ul>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col_one_third col_last">
+
+
+
+                        <div class="widget subscribe-widget clearfix">
+                            <h5><strong>Subscribe</strong> để nhận được thông tin sách mới nhất!!!</h5>
+                            <div class="widget-subscribe-form-result"></div>
+                            <form id="widget-subscribe-form" action="include/subscribe.php" role="form" method="post" class="nobottommargin">
+                                <div class="input-group divcenter">
+                                    <span class="input-group-addon"><i class="icon-email2"></i></span>
+                                    <input type="email" id="widget-subscribe-form-email" name="widget-subscribe-form-email" class="form-control required email" placeholder="Enter your Email">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-success" type="submit">Subscribe</button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+
+
+
+                    </div>
+
+                </div><!-- .footer-widgets-wrap end -->
+            </div>
+
+            <!-- Copyrights
+            ============================================= -->
+            <div id="copyrights">
+
+                <div class="container clearfix">
+
+                    <div class="col_half">
+                        Copyrights &copy; 2014 All Rights Reserved by Canvas Inc.<br>
+
+                    </div>
+
+
+
+                </div>
+
+            </div><!-- #copyrights end -->
+
+        </footer><!-- #footer end -->
+    </div><!-- #wrapper end -->
+    <!-- Go To Top
+    ============================================= -->
+    <div id="gotoTop" class="icon-angle-up"></div>
+
+    <!-- External JavaScripts
+    ============================================= -->
+    <script type="text/javascript" src="~/Template/js/jquery.js"></script>
+    <script type="text/javascript" src="~/Template/js/plugins.js"></script>
+
+    <!-- Footer Scripts
+    ============================================= -->
+    <script type="text/javascript" src="~/Template/js/functions.js"></script>
+
+    <!-- SLIDER REVOLUTION 5.x SCRIPTS  -->
+    <script type="text/javascript" src="~/Template/include/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+    <script type="text/javascript" src="~/Template/include/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+
+    <script type="text/javascript" src="~/Template/include/rs-plugin/js/extensions/revolution.extension.video.min.js"></script>
+    <script type="text/javascript" src="~/Template/include/rs-plugin/js/extensions/revolution.extension.slideanims.min.js"></script>
+    <script type="text/javascript" src="~/Template/include/rs-plugin/js/extensions/revolution.extension.actions.min.js"></script>
+    <script type="text/javascript" src="~/Template/include/rs-plugin/js/extensions/revolution.extension.layeranimation.min.js"></script>
+    <script type="text/javascript" src="~/Template/include/rs-plugin/js/extensions/revolution.extension.kenburn.min.js"></script>
+    <script type="text/javascript" src="~/Template/include/rs-plugin/js/extensions/revolution.extension.navigation.min.js"></script>
+    <script type="text/javascript" src="~/Template/include/rs-plugin/js/extensions/revolution.extension.migration.min.js"></script>
+    <script type="text/javascript" src="~/Template/include/rs-plugin/js/extensions/revolution.extension.parallax.min.js"></script>
+
+    <script type="text/javascript">
+
+		var tpj=jQuery;
+		tpj.noConflict();
+
+		tpj(document).ready(function() {
+
+			var apiRevoSlider = tpj('.tp-banner').show().revolution(
+			{
+				sliderType:"standard",
+				jsFileLocation:"include/rs-plugin/js/",
+				sliderLayout:"fullwidth",
+				dottedOverlay:"none",
+				delay:9000,
+				navigation: {},
+				responsiveLevels:[1200,992,768,480,320],
+				gridwidth:1140,
+				gridheight:500,
+				lazyType:"none",
+				shadow:0,
+				spinner:"off",
+				autoHeight:"off",
+				disableProgressBar:"on",
+				hideThumbsOnMobile:"off",
+				hideSliderAtLimit:0,
+				hideCaptionAtLimit:0,
+				hideAllCaptionAtLilmit:0,
+				debugMode:false,
+				fallbacks: {
+					simplifyAll:"off",
+					disableFocusListener:false,
+				},
+				navigation: {
+					keyboardNavigation:"off",
+					keyboard_direction: "horizontal",
+					mouseScrollNavigation:"off",
+					onHoverStop:"off",
+					touch:{
+						touchenabled:"on",
+						swipe_threshold: 75,
+						swipe_min_touches: 1,
+						swipe_direction: "horizontal",
+						drag_block_vertical: false
+					},
+					arrows: {
+						style: "ares",
+						enable: true,
+						hide_onmobile: false,
+						hide_onleave: false,
+						tmp: '<div class="tp-title-wrap">	<span class="tp-arr-titleholder">{{title}}</span> </div>',
+						left: {
+							h_align: "left",
+							v_align: "center",
+							h_offset: 10,
+							v_offset: 0
+						},
+						right: {
+							h_align: "right",
+							v_align: "center",
+							h_offset: 10,
+							v_offset: 0
+						}
+					}
+				}
+			});
+
+			apiRevoSlider.bind("revolution.slide.onloaded",function (e) {
+				SEMICOLON.slider.sliderParallaxDimensions();
+			});
+
+		}); //ready
+
+    </script>
+    @RenderSection("Scripts", false)
+    @RenderSection("jsFooter", required: false)
+</body>
+</html>

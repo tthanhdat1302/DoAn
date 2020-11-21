@@ -1,0 +1,43 @@
+﻿@model DoAn2.Models.NhaXuatBan
+
+@{
+    ViewBag.Title = "Xem chi tiết";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Chi tiết</h2>
+
+<div>
+    <h4>Nhà xuất bản</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenNhaXuatBan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenNhaXuatBan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiaChi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaChi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DienThoai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DienThoai)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.NhaXuatBanID }) |
+    @Html.ActionLink("Quay về", "Index")
+</p>

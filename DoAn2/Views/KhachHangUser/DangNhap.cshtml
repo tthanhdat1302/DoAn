@@ -1,0 +1,164 @@
+﻿@model DoAn2.Models.UserKH
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Data/userKhController.js"></script>
+
+
+<!-- Content
+        ============================================= -->
+<section id="content">
+
+    <div class="content-wrap">
+
+        <div class="container clearfix">
+
+            <div class="tabs divcenter nobottommargin clearfix" id="tab-login-register" style="max-width: 500px;">
+
+                <ul class="tab-nav tab-nav2 center clearfix">
+                    <li class="inline-block"><a href="#tab-login">Đăng Nhập</a></li>
+                    <li class="inline-block"><a href="#tab-register">Đăng Ký</a></li>
+                </ul>
+
+                <div class="tab-container">
+
+                    <div class="tab-content clearfix" id="tab-login">
+                        <div class="panel panel-default nobottommargin">
+                            <div class="panel-body" style="padding: 40px;">
+                                @using (Html.BeginForm("DangNhap", "KhachHangUser", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <form id="login-form" name="login-form" class="nobottommargin" action="#" method="post">
+
+                                        <h3>Đăng Nhập Tài Khoản</h3>
+
+                                        <div class="col_full">
+                                            <label for="login-form-username">Tài Khoản:</label>
+                                            @Html.TextBoxFor(model => model.TaiKhoan, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.TaiKhoan, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <div class="col_full">
+                                            <label for="login-form-password">Mật Khẩu:</label>
+                                            @Html.PasswordFor(model => model.PassWord, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.PassWord, "", new { @class = "text-danger" })
+                                        </div>
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        <div class="col_full nobottommargin">
+                                            <button class="button button-3d button-black nomargin" id="login-form-submit" name="login-form-submit" value="login">Đăng Nhập</button>
+                                            <a href="#" class="fright">Quên Mật Khẩu</a>
+                                        </div>
+
+                                        <div class="line line-sm"></div>
+
+                                        <div class="center">
+                                            <h4 style="margin-bottom: 15px;">Đăng Nhập Bằng:</h4>
+                                            <a href="#" class="button button-rounded si-facebook si-colored">Facebook</a>
+                                            <span class="hidden-xs">hoặc</span>
+                                            <a href="#" class="button button-rounded si-twitter si-colored">Twitter</a>
+                                        </div>
+                                    </form>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content clearfix" id="tab-register">
+                        <div class="panel panel-default nobottommargin">
+                            <div class="panel-body" style="padding: 40px;">
+                                <h3>Tạo Tài Khoản</h3>
+                                @using (Html.BeginForm("DangKy", "KhachHangUser", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                <form id="register-form" name="register-form" class="nobottommargin" action="#" method="post">
+
+                                    <div class="col_full">
+                                        <label for="register-form-name">Tài Khoản:</label>
+                                        @Html.TextBoxFor(model => model.TaiKhoan, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.TaiKhoan, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="col_full">
+                                        <label for="register-form-email">Mật Khẩu:</label>
+                                        @Html.PasswordFor(model => model.PassWord, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.PassWord, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="col_full">
+                                        <label for="register-form-username">Xác Nhận Mật Khẩu:</label>
+                                        @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="col_full">
+                                        <label for="register-form-phone">Tên:</label>
+                                        @Html.TextBoxFor(model => model.Ten, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Ten, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="col_full">
+                                        <label for="register-form-password">Địa Chỉ:</label>
+                                        @Html.TextAreaFor(model => model.DiaChi, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="col_full">
+                                        <label for="register-form-repassword">Email:</label>
+                                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col_full">
+                                        <label for="register-form-repassword">Điện Thoại:</label>
+                                        @Html.TextBoxFor(model => model.DienThoai, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.DienThoai, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="col_full">
+                                        <label for="register-form-repassword">Tỉnh/Thành:</label>
+                                        @Html.DropDownList("TinhThanh", new SelectList(new string[] { }), new { @class = "form-control", @id = "ddlProvince", @onClick = "loadDistrict(value)" })
+                                        @Html.ValidationMessageFor(model => model.TinhThanh, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="col_full">
+                                        <label for="register-form-repassword">Quận/Huyện:</label>
+                                        @Html.DropDownList("QuanHuyen", new SelectList(new string[] { }), new { @class = "form-control", @id = "ddlDistrict" })
+                                        @Html.ValidationMessageFor(model => model.QuanHuyen, "", new { @class = "text-danger" })
+                                    </div>
+                                    
+                                    <div class="col_full nobottommargin">
+                                        <button class="button button-3d button-black nomargin" id="register-form-submit" name="register-form-submit" value="register">Đăng Ký</button>
+                                    </div>
+
+                                    <div class="line line-sm"></div>
+
+                                    <div class="center">
+                                        <h4 style="margin-bottom: 15px;">Liên Kết Tài Khoản:</h4>
+                                        <a href="#" class="button button-rounded si-facebook si-colored">Facebook</a>
+                                        <span class="hidden-xs">Hay</span>
+                                        <a href="#" class="button button-rounded si-twitter si-colored">Twitter</a>
+                                    </div>
+
+                                </form>
+                                }
+                            </div>
+                        </div>
+                        <script>
+                            $(document).ready(function () {
+                                loadProvince()
+                            });
+                        </script>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section><!-- #content end -->

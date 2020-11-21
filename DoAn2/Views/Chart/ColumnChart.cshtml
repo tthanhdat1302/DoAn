@@ -1,0 +1,108 @@
+﻿@{
+    ViewBag.Title = "Thống kê hoạt động";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<html>
+<head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        var temp1 = '@ViewBag.Data';
+        var data1 = JSON.parse('@ViewBag.Data');
+        var temp2 = '@ViewBag.DataArea';
+        var data2 = JSON.parse('@ViewBag.DataArea');
+        var temp3 = '@ViewBag.DataColumn';
+        var data3 = JSON.parse('@ViewBag.DataColumn');
+         var data4 = JSON.parse('@ViewBag.DataDonut');
+        console.log(data2);
+    </script>
+    <!--Load the AJAX API-->
+    <!--Biểu đồ giá các đơn hàng - Pie Chart-->>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            var data = google.visualization.arrayToDataTable(data1);
+
+            var options = {
+                title: 'Biểu đồ giá các đơn hàng',
+                'is3D': true,
+                'width': 400,
+                'height': 300
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+            chart.draw(data, options);
+        }
+    </script>
+    <!--Biểu đồ doanh thu bán hàng qua các năm - Area Chart-->
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable(data2);
+
+            var options = {
+                title: 'Biểu đồ doanh thu bán hàng qua các năm',
+                hAxis: { title: 'Year', titleTextStyle: { color: '#333' } },
+                vAxis: { minValue: 0 }
+            };
+
+            var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+    </script>
+    <!--Biểu đồ hiệu suất sách - Column Chart-->
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['bar'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable(data3);
+
+            var options = {
+                chart: {
+                    title: 'Biểu đồ hiệu suất sách',
+                    subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+                }
+            };
+
+            var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+            chart.draw(data, google.charts.Bar.convertOptions(options));
+        }
+    </script>
+    <!--Biểu lượt xem của sách - Donut Chart-->
+    <script type="text/javascript">
+        google.charts.load("current", { packages: ["corechart"] });
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable(data4);
+
+            var options = {
+                title: 'Biểu lượt xem của sách',
+                pieHole: 0.4,
+
+                'width': 400,
+                'height': 300
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+
+<body>
+    <!--Div that will hold the pie chart--><br />
+    <div id="chart_div" style="width: 100%; height: 500px;"></div><br />
+    <div id="columnchart_material" style="height: 500px;"></div><br />
+    <div class="row">
+        <div class="col-md-4" id="piechart"></div>
+        <div class="col-md-4" id="donutchart"></div>
+    </div>
+</body>
+</html>

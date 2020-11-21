@@ -1,0 +1,119 @@
+﻿@model DoAn2.Models.Sach
+
+@{
+    ViewBag.Title = "Xác nhận xóa";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<h3>Bạn có muốn xóa @Model.TenSach ?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ChuDe.TenChuDe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChuDe.TenChuDe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NhaXuatBan.TenNhaXuatBan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NhaXuatBan.TenNhaXuatBan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TenSach)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenSach)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GiaBan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GiaBan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MoTa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MoTa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HinhBia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HinhBia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoTrang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoTrang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrongLuong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrongLuong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayCapNhat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayCapNhat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLanXem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoLanXem)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLuongBan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoLuongBan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HetHang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HetHang)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-danger" /> |
+            @Html.ActionLink("Quay về", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="30b81adf200541949cd45896862129bc" Name="Diagram1">
+        <EntityTypeShape EntityType="BOOKSTOREQBModel.ChuDe" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="BOOKSTOREQBModel.Comment" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BOOKSTOREQBModel.DatHang" Width="1.5" PointX="6" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BOOKSTOREQBModel.DatHangCT" Width="1.5" PointX="8.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BOOKSTOREQBModel.Menu" Width="1.5" PointX="11" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BOOKSTOREQBModel.MenuType" Width="1.5" PointX="8.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BOOKSTOREQBModel.NhaXuatBan" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BOOKSTOREQBModel.Sach" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BOOKSTOREQBModel.SlideBar" Width="1.5" PointX="10.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BOOKSTOREQBModel.TacGia" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BOOKSTOREQBModel.ThamGia" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BOOKSTOREQBModel.ThongTinCongTi" Width="1.5" PointX="5.75" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BOOKSTOREQBModel.User" Width="1.5" PointX="10" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BOOKSTOREQBModel.UserKH" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BOOKSTOREQBModel.UserRole" Width="1.5" PointX="7.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BOOKSTOREQBModel.YKienKH" Width="1.5" PointX="7.75" PointY="13.125" IsExpanded="true" />
+        <AssociationConnector Association="BOOKSTOREQBModel.FK_Sach_ChuDe" ManuallyRouted="false" />
+        <AssociationConnector Association="BOOKSTOREQBModel.FK_Comment_Sach" ManuallyRouted="false" />
+        <AssociationConnector Association="BOOKSTOREQBModel.FK_Comment_UserKH" ManuallyRouted="false" />
+        <AssociationConnector Association="BOOKSTOREQBModel.FK_DatHangCT_DatHang" ManuallyRouted="false" />
+        <AssociationConnector Association="BOOKSTOREQBModel.FK_DatHangCT_Sach" ManuallyRouted="false" />
+        <AssociationConnector Association="BOOKSTOREQBModel.FK_Menu_MenuType" ManuallyRouted="false" />
+        <AssociationConnector Association="BOOKSTOREQBModel.FK_Sach_NhaXuatBan" ManuallyRouted="false" />
+        <AssociationConnector Association="BOOKSTOREQBModel.FK_ThamGia_Sach" ManuallyRouted="false" />
+        <AssociationConnector Association="BOOKSTOREQBModel.FK_ThamGia_TacGia" ManuallyRouted="false" />
+        <AssociationConnector Association="BOOKSTOREQBModel.FK_User_UserRole" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

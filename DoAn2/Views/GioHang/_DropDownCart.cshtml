@@ -1,0 +1,45 @@
+﻿@{
+    var dsSanPham = ViewBag.Cart as DoAn2.ViewModels.GioHangModel;
+}
+
+<!-- Top Cart
+                       ============================================= -->
+<div id="top-cart">
+    @if (dsSanPham != null)
+    {
+        if (dsSanPham.TongSanPham > 0)
+        {
+            <a href="#" id="top-cart-trigger">
+                <i class="icon-shopping-cart"></i>
+                <span>@dsSanPham.TongSanPham</span>
+            </a>
+        }
+        <div class="top-cart-content">
+
+            <div class="top-cart-title">
+                <h4>Giỏ hàng</h4>
+            </div>
+            <div class="top-cart-items">
+
+                @foreach (var item in dsSanPham.Items)
+                {
+                    <div class="top-cart-item clearfix">
+                        <div class="top-cart-item-image">
+                            <a href="#"><img src="~/Images/@item.SanPham.HinhBia" alt="@item.SanPham.TenSach" /></a>
+                        </div>
+                        <div class="top-cart-item-desc">
+                            <a href="#">@item.SanPham.TenSach</a>
+                            <span class="top-cart-item-price">@item.SanPham.GiaBan.ToString("0,00##VNĐ")</span>
+                            <span class="top-cart-item-quantity">x @item.SoLuong</span>
+                        </div>
+                    </div>
+                }
+
+            </div>
+            <div class="top-cart-action clearfix">
+                <span class="fleft top-checkout-price">@dsSanPham.TongTriGia.ToString("0,00##VNĐ")</span>
+                <a href="@Url.Action("Index", "GioHang")" class="button button-3d button-rounded button-aqua"><i class="icon-cart"></i>Xem giỏ hàng</a>
+            </div>
+        </div>
+    }
+</div><!-- #top-cart end -->

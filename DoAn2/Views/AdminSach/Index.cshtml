@@ -1,0 +1,153 @@
+﻿@model IEnumerable<DoAn2.Models.Sach>
+
+@{
+    ViewBag.Title = "Danh mục sách";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Danh mục sách</h6>
+        </div>
+        <div class="card-body">
+            <div class="table">
+                <table id="dataTable" class="display" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ChuDe.TenChuDe)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.NhaXuatBan.TenNhaXuatBan)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TenSach)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.GiaBan)
+                            </th>
+                            
+                            <th>
+                                @Html.DisplayNameFor(model => model.HinhBia)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.SoTrang)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TrongLuong)
+                            </th>
+                           
+                            <th>
+                                @Html.DisplayNameFor(model => model.SoLanXem)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.SoLuongBan)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.HetHang)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ChuDe.TenChuDe)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.NhaXuatBan.TenNhaXuatBan)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TenSach)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.GiaBan)
+                            </th>
+                           
+                            <th>
+                                @Html.DisplayNameFor(model => model.HinhBia)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.SoTrang)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TrongLuong)
+                            </th>
+                           
+                            <th>
+                                @Html.DisplayNameFor(model => model.SoLanXem)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.SoLuongBan)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.HetHang)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ChuDe.TenChuDe)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NhaXuatBan.TenNhaXuatBan)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TenSach)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.GiaBan)
+                                </td>
+                                
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.HinhBia)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SoTrang)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TrongLuong)
+                                </td>
+                                
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SoLanXem)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SoLuongBan)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.HetHang)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Sửa", "Edit", new { id = item.SachID }) |
+                                    @Html.ActionLink("Xem", "Details", new { id = item.SachID }) |
+                                    @Html.ActionLink("Xóa", "Delete", new { id = item.SachID }) |
+                                    @Html.ActionLink("Upload", "Upload", new { id = item.SachID })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+    </script>
+}
+

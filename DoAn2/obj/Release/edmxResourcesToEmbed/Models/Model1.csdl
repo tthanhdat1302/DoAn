@@ -1,0 +1,377 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BOOKSTOREQBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ChuDe">
+    <Key>
+      <PropertyRef Name="MaChuDe" />
+    </Key>
+    <Property Name="MaChuDe" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="TenChuDe" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Saches" Relationship="Self.FK_Sach_ChuDe" FromRole="ChuDe" ToRole="Sach" />
+  </EntityType>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="SachID" />
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="SachID" Type="Int32" Nullable="false" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NgayDang" Type="DateTime" Precision="0" />
+    <Property Name="Rating" Type="Int32" />
+    <NavigationProperty Name="Sach" Relationship="Self.FK_Comment_Sach" FromRole="Comment" ToRole="Sach" />
+    <NavigationProperty Name="UserKH" Relationship="Self.FK_Comment_UserKH" FromRole="Comment" ToRole="UserKH" />
+  </EntityType>
+  <EntityType Name="DatHang">
+    <Key>
+      <PropertyRef Name="DatHangID" />
+    </Key>
+    <Property Name="DatHangID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NgayDatHang" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TriGia" Type="Double" Nullable="false" />
+    <Property Name="DaGiao" Type="Boolean" Nullable="false" />
+    <Property Name="NgayGiao" Type="DateTime" Precision="3" />
+    <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DiaChi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="DienThoai" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="DatHangCTs" Relationship="Self.FK_DatHangCT_DatHang" FromRole="DatHang" ToRole="DatHangCT" />
+  </EntityType>
+  <EntityType Name="DatHangCT">
+    <Key>
+      <PropertyRef Name="DatHangID" />
+      <PropertyRef Name="SachID" />
+    </Key>
+    <Property Name="DatHangID" Type="Int32" Nullable="false" />
+    <Property Name="SachID" Type="Int32" Nullable="false" />
+    <Property Name="SoLuong" Type="Int32" Nullable="false" />
+    <Property Name="DonGia" Type="Double" Nullable="false" />
+    <Property Name="ThanhTien" Type="Double" Nullable="false" />
+    <NavigationProperty Name="DatHang" Relationship="Self.FK_DatHangCT_DatHang" FromRole="DatHangCT" ToRole="DatHang" />
+    <NavigationProperty Name="Sach" Relationship="Self.FK_DatHangCT_Sach" FromRole="DatHangCT" ToRole="Sach" />
+  </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Text" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Link" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="DisplayOrder" Type="Int32" />
+    <Property Name="Target" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="TypeID" Type="Int32" />
+    <NavigationProperty Name="MenuType" Relationship="Self.FK_Menu_MenuType" FromRole="Menu" ToRole="MenuType" />
+  </EntityType>
+  <EntityType Name="MenuType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Menus" Relationship="Self.FK_Menu_MenuType" FromRole="MenuType" ToRole="Menu" />
+  </EntityType>
+  <EntityType Name="NhaXuatBan">
+    <Key>
+      <PropertyRef Name="NhaXuatBanID" />
+    </Key>
+    <Property Name="NhaXuatBanID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenNhaXuatBan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="DiaChi" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="DienThoai" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Saches" Relationship="Self.FK_Sach_NhaXuatBan" FromRole="NhaXuatBan" ToRole="Sach" />
+  </EntityType>
+  <EntityType Name="Sach">
+    <Key>
+      <PropertyRef Name="SachID" />
+    </Key>
+    <Property Name="SachID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenSach" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="GiaBan" Type="Double" Nullable="false" />
+    <Property Name="MaChuDe" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+    <Property Name="NhaXuatBanID" Type="Int32" Nullable="false" />
+    <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="HinhBia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SoTrang" Type="Int32" Nullable="false" />
+    <Property Name="TrongLuong" Type="Int32" Nullable="false" />
+    <Property Name="NgayCapNhat" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="SoLanXem" Type="Int32" Nullable="false" />
+    <Property Name="SoLuongBan" Type="Int32" Nullable="false" />
+    <Property Name="HetHang" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="ChuDe" Relationship="Self.FK_Sach_ChuDe" FromRole="Sach" ToRole="ChuDe" />
+    <NavigationProperty Name="Comments" Relationship="Self.FK_Comment_Sach" FromRole="Sach" ToRole="Comment" />
+    <NavigationProperty Name="DatHangCTs" Relationship="Self.FK_DatHangCT_Sach" FromRole="Sach" ToRole="DatHangCT" />
+    <NavigationProperty Name="NhaXuatBan" Relationship="Self.FK_Sach_NhaXuatBan" FromRole="Sach" ToRole="NhaXuatBan" />
+    <NavigationProperty Name="ThamGias" Relationship="Self.FK_ThamGia_Sach" FromRole="Sach" ToRole="ThamGia" />
+  </EntityType>
+  <EntityType Name="SlideBar">
+    <Key>
+      <PropertyRef Name="SlideID" />
+    </Key>
+    <Property Name="SlideID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Hinh" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="TacGia">
+    <Key>
+      <PropertyRef Name="TacGiaID" />
+    </Key>
+    <Property Name="TacGiaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenTacGia" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="DiaChi" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="DienThoai" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="TieuSu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ThamGias" Relationship="Self.FK_ThamGia_TacGia" FromRole="TacGia" ToRole="ThamGia" />
+  </EntityType>
+  <EntityType Name="ThamGia">
+    <Key>
+      <PropertyRef Name="SachID" />
+      <PropertyRef Name="TacGiaID" />
+    </Key>
+    <Property Name="SachID" Type="Int32" Nullable="false" />
+    <Property Name="TacGiaID" Type="Int32" Nullable="false" />
+    <Property Name="VaiTro" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ViTri" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Sach" Relationship="Self.FK_ThamGia_Sach" FromRole="ThamGia" ToRole="Sach" />
+    <NavigationProperty Name="TacGia" Relationship="Self.FK_ThamGia_TacGia" FromRole="ThamGia" ToRole="TacGia" />
+  </EntityType>
+  <EntityType Name="ThongTinCongTi">
+    <Key>
+      <PropertyRef Name="TenCongTi" />
+    </Key>
+    <Property Name="TenCongTi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TruSo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SDT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Logo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TaiKhoan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MatKhau" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TrangThai" Type="Boolean" Nullable="false" />
+    <Property Name="RoleID" Type="Int32" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="UserRole" Relationship="Self.FK_User_UserRole" FromRole="User" ToRole="UserRole" />
+  </EntityType>
+  <EntityType Name="UserKH">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TaiKhoan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PassWord" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ConfirmPassword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Ten" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DiaChi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DienThoai" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TinhThanh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="QuanHuyen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NgayTao" Type="DateTime" Precision="3" />
+    <Property Name="NgayCapNhat" Type="DateTime" Precision="3" />
+    <Property Name="TrangThai" Type="Boolean" />
+    <Property Name="Hinh" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Comments" Relationship="Self.FK_Comment_UserKH" FromRole="UserKH" ToRole="Comment" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenRole" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_User_UserRole" FromRole="UserRole" ToRole="User" />
+  </EntityType>
+  <EntityType Name="YKienKH">
+    <Key>
+      <PropertyRef Name="Email" />
+    </Key>
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SDT" Type="Binary" MaxLength="50" FixedLength="false" />
+    <Property Name="DiaChi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NgayGui" Type="DateTime" Precision="0" />
+    <Property Name="KHID" Type="Int64" />
+  </EntityType>
+  <Association Name="FK_Sach_ChuDe">
+    <End Role="ChuDe" Type="Self.ChuDe" Multiplicity="0..1" />
+    <End Role="Sach" Type="Self.Sach" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChuDe">
+        <PropertyRef Name="MaChuDe" />
+      </Principal>
+      <Dependent Role="Sach">
+        <PropertyRef Name="MaChuDe" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comment_Sach">
+    <End Role="Sach" Type="Self.Sach" Multiplicity="1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sach">
+        <PropertyRef Name="SachID" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="SachID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comment_UserKH">
+    <End Role="UserKH" Type="Self.UserKH" Multiplicity="1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserKH">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DatHangCT_DatHang">
+    <End Role="DatHang" Type="Self.DatHang" Multiplicity="1" />
+    <End Role="DatHangCT" Type="Self.DatHangCT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DatHang">
+        <PropertyRef Name="DatHangID" />
+      </Principal>
+      <Dependent Role="DatHangCT">
+        <PropertyRef Name="DatHangID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DatHangCT_Sach">
+    <End Role="Sach" Type="Self.Sach" Multiplicity="1" />
+    <End Role="DatHangCT" Type="Self.DatHangCT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sach">
+        <PropertyRef Name="SachID" />
+      </Principal>
+      <Dependent Role="DatHangCT">
+        <PropertyRef Name="SachID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Menu_MenuType">
+    <End Role="MenuType" Type="Self.MenuType" Multiplicity="0..1" />
+    <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MenuType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Menu">
+        <PropertyRef Name="TypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sach_NhaXuatBan">
+    <End Role="NhaXuatBan" Type="Self.NhaXuatBan" Multiplicity="1" />
+    <End Role="Sach" Type="Self.Sach" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NhaXuatBan">
+        <PropertyRef Name="NhaXuatBanID" />
+      </Principal>
+      <Dependent Role="Sach">
+        <PropertyRef Name="NhaXuatBanID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ThamGia_Sach">
+    <End Role="Sach" Type="Self.Sach" Multiplicity="1" />
+    <End Role="ThamGia" Type="Self.ThamGia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sach">
+        <PropertyRef Name="SachID" />
+      </Principal>
+      <Dependent Role="ThamGia">
+        <PropertyRef Name="SachID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ThamGia_TacGia">
+    <End Role="TacGia" Type="Self.TacGia" Multiplicity="1" />
+    <End Role="ThamGia" Type="Self.ThamGia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TacGia">
+        <PropertyRef Name="TacGiaID" />
+      </Principal>
+      <Dependent Role="ThamGia">
+        <PropertyRef Name="TacGiaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_UserRole">
+    <End Role="UserRole" Type="Self.UserRole" Multiplicity="0..1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserRole">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BOOKSTOREEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ChuDes" EntityType="Self.ChuDe" />
+    <EntitySet Name="Comments" EntityType="Self.Comment" />
+    <EntitySet Name="DatHangs" EntityType="Self.DatHang" />
+    <EntitySet Name="DatHangCTs" EntityType="Self.DatHangCT" />
+    <EntitySet Name="Menus" EntityType="Self.Menu" />
+    <EntitySet Name="MenuTypes" EntityType="Self.MenuType" />
+    <EntitySet Name="NhaXuatBans" EntityType="Self.NhaXuatBan" />
+    <EntitySet Name="Saches" EntityType="Self.Sach" />
+    <EntitySet Name="SlideBars" EntityType="Self.SlideBar" />
+    <EntitySet Name="TacGias" EntityType="Self.TacGia" />
+    <EntitySet Name="ThamGias" EntityType="Self.ThamGia" />
+    <EntitySet Name="ThongTinCongTis" EntityType="Self.ThongTinCongTi" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="UserKHs" EntityType="Self.UserKH" />
+    <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+    <EntitySet Name="YKienKHs" EntityType="Self.YKienKH" />
+    <AssociationSet Name="FK_Sach_ChuDe" Association="Self.FK_Sach_ChuDe">
+      <End Role="ChuDe" EntitySet="ChuDes" />
+      <End Role="Sach" EntitySet="Saches" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comment_Sach" Association="Self.FK_Comment_Sach">
+      <End Role="Sach" EntitySet="Saches" />
+      <End Role="Comment" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comment_UserKH" Association="Self.FK_Comment_UserKH">
+      <End Role="UserKH" EntitySet="UserKHs" />
+      <End Role="Comment" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DatHangCT_DatHang" Association="Self.FK_DatHangCT_DatHang">
+      <End Role="DatHang" EntitySet="DatHangs" />
+      <End Role="DatHangCT" EntitySet="DatHangCTs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DatHangCT_Sach" Association="Self.FK_DatHangCT_Sach">
+      <End Role="Sach" EntitySet="Saches" />
+      <End Role="DatHangCT" EntitySet="DatHangCTs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Menu_MenuType" Association="Self.FK_Menu_MenuType">
+      <End Role="MenuType" EntitySet="MenuTypes" />
+      <End Role="Menu" EntitySet="Menus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sach_NhaXuatBan" Association="Self.FK_Sach_NhaXuatBan">
+      <End Role="NhaXuatBan" EntitySet="NhaXuatBans" />
+      <End Role="Sach" EntitySet="Saches" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ThamGia_Sach" Association="Self.FK_ThamGia_Sach">
+      <End Role="Sach" EntitySet="Saches" />
+      <End Role="ThamGia" EntitySet="ThamGias" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ThamGia_TacGia" Association="Self.FK_ThamGia_TacGia">
+      <End Role="TacGia" EntitySet="TacGias" />
+      <End Role="ThamGia" EntitySet="ThamGias" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_UserRole" Association="Self.FK_User_UserRole">
+      <End Role="UserRole" EntitySet="UserRoles" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,21 @@
+﻿@model DoAn2.Models.Comment
+@using (Html.BeginForm("DanhGia", "SanPham", FormMethod.Post))
+{
+    <div class="col_full col_last">
+        @Html.LabelFor(model => model.Rating)
+        @Html.DropDownList("Rating", null, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="clear"></div>
+
+    <div class="col_full">
+        <label for="template-reviewform-comment">Đánh giá <small>*</small></label>
+        @Html.TextArea("NoiDung", new { @class = "required form-control", @rows = "6", @cols = "30" })
+        @Html.ValidationMessageFor(model => model.SachID, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="col_full nobottommargin">
+        <button class="button button-3d nomargin" type="submit" id="template-reviewform-submit" name="template-reviewform-submit" value="submit">Gửi đánh giá của bạn</button>
+    </div>
+}

@@ -1,0 +1,27 @@
+﻿@model DoAn2.Models.ChuDe
+
+@{
+    ViewBag.Title = "Xem chi tiết";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Chi tiết</h2>
+
+<div>
+    <h4>Chủ đề</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenChuDe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenChuDe)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.MaChuDe }) |
+    @Html.ActionLink("Quay về", "Index")
+</p>

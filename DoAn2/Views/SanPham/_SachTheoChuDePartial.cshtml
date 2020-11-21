@@ -1,0 +1,14 @@
+﻿
+@model List<DoAn2.Models.ChuDe>
+
+<div class="widget widget_links clearfix">
+
+    <h4>Chủ đề</h4>
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li><a href="@Url.Action("DanhMucTheoChuDe", "SanPham", new { id = item.MaChuDe })">@item.TenChuDe</a></li>
+        }
+    </ul>
+
+</div>

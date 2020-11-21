@@ -1,0 +1,249 @@
+﻿@model List<DoAn2.Models.Sach>
+
+
+@{
+    ViewBag.Title = "Trang chủ";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var listLog = Session["Log"] as DoAn2.ViewModels.LogModel;
+    var ds = ViewBag.ds as List<string>;
+    var nguoiDung = Session["NguoiDung"] as DoAn2.Models.User;
+    @*<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>*@
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+}
+
+<script type="text/javascript">
+        var temp2 = '@ViewBag.DataArea';
+        var data2 = JSON.parse('@ViewBag.DataArea');
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable(data2);
+
+            var options = {
+                title: 'Biểu đồ doanh thu bán hàng qua các năm',
+                hAxis: { title: 'Year', titleTextStyle: { color: '#333' } },
+                vAxis: { minValue: 0 }
+            };
+
+            var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+</script>
+
+
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Thống kê</h1>
+
+</div>
+<!-- Content Row -->
+<div class="row">
+
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Doanh thu (Tháng)</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.DTThang</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Doanh thu (Ngày)</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.DTNgay</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Sản phẩm mới</div>
+                    </div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.SanPhamMoi</div>
+                </div>
+                <div class="col-auto">
+                    <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Pending Requests Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Đơn hàng mới</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.DonHangMoi</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Content Row -->
+<div class="row">
+    <!-- Area Chart -->
+    <div class="col-xl-8 col-lg-7">
+        @*<div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Biểu đồ </h6>
+            </div>
+            <div class="card-body">
+                <div class="chart-area">
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+        </div>*@
+        <div id="chart_div" style="width: 100%; height: 500px;"></div><br />
+    </div>
+
+
+
+
+    <!--Div that will hold the pie chart--><br />
+    @*<div id="chart_div" style="width: 100%; height: 500px;"></div><br />
+    <div id="columnchart_material" style="height: 500px;"></div><br />
+    <div class="row">
+        <div class="col-md-4" id="piechart"></div>
+        <div class="col-md-4" id="donutchart"></div>
+    </div>*@
+
+
+
+
+
+    <!-- Pie Chart -->
+    @if (nguoiDung.RoleID == 1)
+    {
+        <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Danh sách hoạt động</h6>
+                    <div class="dropdown no-arrow">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+
+                            <a class="dropdown-item" href="@Url.Action("ExportToExcel")">Xuất file Excel</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <table class="table">
+                        <tr>
+                            <th>
+                                Thông báo
+                            </th>
+                            <th>
+                                Thời gian
+                            </th>
+
+                            <th></th>
+                        </tr>
+
+                        @foreach (var item in listLog.Items)
+                        {
+                            <tr>
+                                <td>
+                                    @item.ThongBao
+                                </td>
+                                <td>
+                                    @item.ThoiGian
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+
+    
+
+
+    
+
+@*<script>
+        @{
+            string datastr = "["; var i = 0; var len = Model.Count;
+            foreach (var item in Model)
+            {
+                if (i < len - 1)
+                {
+                    datastr = datastr + "\"" + item.NhaXuatBan.TenNhaXuatBan + "\",";
+                }
+                else
+                {
+                    datastr = datastr + "\"" + item.NhaXuatBan.TenNhaXuatBan + "\"";
+                }
+                i++;
+            }
+            datastr = datastr + "]";
+
+            string datastr1 = "["; var x = 0; var len1 = ds.Count;
+            foreach (var item in ds)
+            {
+                if (x < len1 - 1)
+                {
+                    datastr1 = datastr1 + item + ",";
+                }
+                else
+                {
+                    datastr1 = datastr1 + "\"" + item + "\"";
+                }
+                i++;
+            }
+            datastr1 = datastr1 + "]";
+
+        }
+
+    var labels = @Html.Raw(datastr);
+    var data = @Html.Raw(datastr1);
+        let myChart = document.getElementById('myChart');
+        //console.log(myChart);
+        var chart = myChart.getContext('2d');
+    let barChart = new Chart(chart, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Số lượng sách',
+                data: data
+            }]
+        },
+            options: {}
+        });
+</script>*@
+
